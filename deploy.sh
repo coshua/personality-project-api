@@ -24,10 +24,7 @@ echo "openssl upgrade"
 sudo python -m easy_install --upgrade pyOpenSSL
 
 pip install --user --upgrade awsebcli
-echo "eb default"
-eb use production
-echo "eb --version"
-eb --version
+
 #aws configure set aws_access_key_id $AWS_ACCESS_KEY
 #aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 #aws configure set region ap-northeast-2
@@ -37,6 +34,10 @@ eb --version
  echo '[profile eb-cli]' > ~/.aws/config
  echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/config
  echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+ echo "eb default"
+eb use production
+echo "eb --version"
+eb --version
  echo "eb status"
 eb status
 
