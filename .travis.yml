@@ -16,8 +16,9 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: "$AWS_SECRET_ACCESS_KEY"
   region: "ap-northeast-2"
-  app: "personality-project"
-  env: "personality-project-production"
+  app: "personality-project-api"
+  env: "personality-project-api-production"
   bucket_name: "elasticbeanstalk-ap-northeast-2-751968344197"
+  bucket_path: "docker"
   on:
     branch: production
