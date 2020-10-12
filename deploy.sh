@@ -34,6 +34,8 @@ pip install --user --upgrade awsebcli
  echo '[profile eb-cli]' > ~/.aws/config
  echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/config
  echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+ echo "aws configure list"
+ aws configure list
  echo "eb list"
  eb list
  echo "eb default"
@@ -41,7 +43,7 @@ eb use $PRODUCTION_BRANCH
 echo "eb --version"
 eb --version
  echo "eb status"
-eb status $PRODUCTION_BRANCH
+eb status $PRODUCTION_BRANCH --verbose
 
 # Deploy application to the appropriate ElasticBeanstalk env
 echo "eb deploy"
