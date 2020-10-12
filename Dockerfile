@@ -2,7 +2,7 @@
 FROM alpine:3.7
 
 # Install depedencies
-RUN apk update && apk add -U nodejs yarn
+RUN apk update && apk add -U nodejs=10.19.0-suffix yarn=1.22.0-suffix
 RUN node --version
 RUN yarn --version
 
