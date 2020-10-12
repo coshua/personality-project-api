@@ -18,6 +18,10 @@ fi
 
 EB_ENV="$EB_APP-$NODE_ENV"
 echo "Deploying to $EB_ENV"
+echo "pip upgrade"
+/usr/bin/python -m pip install --upgrade pip
+echo "openssl upgrade"
+sudo python -m easy_install --upgrade pyOpenSSL
 
 pip install --user --upgrade awsebcli
 echo "eb --version"
