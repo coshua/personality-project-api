@@ -63,6 +63,14 @@ app.post("/api/result", (req, res) => {
   }
 });
 
+app.get("/index.html", (req, res) => {
+  res.status(200).send("Index.html");
+});
+
+app.get("/ping.html", (req, res) => {
+  res.status(200).send("ping.html");
+});
+
 app.get("/", (req, res) => {
   res.status(200).send("Hi");
 });
