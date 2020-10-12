@@ -5,7 +5,16 @@ const cors = require("cors");
 const mysql = require("mysql");
 const path = require("path");
 const dotenv = require("dotenv");
+var http = require("http");
 const port = process.env.PORT || 3000;
+
+http
+  .createServer(function (request, response) {
+    response.writeHead(200, { "Content-Type": "text/html" });
+    response.write("Hello ELB - 1");
+    response.end();
+  })
+  .listen(80);
 
 dotenv.config();
 app.use(cors());
