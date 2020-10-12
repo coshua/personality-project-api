@@ -24,6 +24,8 @@ echo "openssl upgrade"
 sudo python -m easy_install --upgrade pyOpenSSL
 
 pip install --user --upgrade awsebcli
+echo "eb default"
+eb use production
 echo "eb --version"
 eb --version
 #aws configure set aws_access_key_id $AWS_ACCESS_KEY
