@@ -20,6 +20,7 @@ EB_ENV="$EB_APP-$NODE_ENV"
 echo "Deploying to $EB_ENV"
 
 pip install --user --upgrade awsebcli
+echo "eb --version"
 eb --version
 #aws configure set aws_access_key_id $AWS_ACCESS_KEY
 #aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
@@ -30,8 +31,10 @@ eb --version
  echo '[profile eb-cli]' > ~/.aws/config
  echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/config
  echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+ echo "eb status"
 eb status
 
 # Deploy application to the appropriate ElasticBeanstalk env
+echo "eb deploy"
 eb deploy $EB_ENV -v
 rm ~/.aws/config
