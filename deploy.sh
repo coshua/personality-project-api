@@ -37,11 +37,11 @@ pip install --user --upgrade awsebcli
  echo "eb list"
  eb list
  echo "eb default"
-eb use production
+eb use $PRODUCTION_BRANCH
 echo "eb --version"
 eb --version
  echo "eb status"
-eb status
+eb status $PRODUCTION_BRANCH
 
 # Deploy application to the appropriate ElasticBeanstalk env
 echo "eb deploy"
