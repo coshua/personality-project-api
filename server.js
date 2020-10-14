@@ -1,9 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const cors = require("cors");
 const mysql = require("mysql");
-const path = require("path");
 const dotenv = require("dotenv");
 var http = require("http");
 const port = process.env.PORT || 3000;
@@ -17,7 +15,10 @@ http
   .listen(80);
 
 dotenv.config();
-app.use(cors());
+app.all("/*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://personality.jutopia.net");
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,9 +31,9 @@ const db = mysql.createConnection({
 });
 db.connect();
 
-if (process.env.NODE_ENV === "production") {
+/* if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
-}
+} */
 
 var queryStat = `SELECT SUM(CASE WHEN category = "ISTJ" THEN 1 ELSE 0 END) AS "ISTJ",
 SUM(CASE WHEN category = "ISTP" THEN 1 ELSE 0 END) AS "ISTP",
@@ -70,14 +71,6 @@ app.post("/api/result", (req, res) => {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
-});
-
-app.get("/index.html", (req, res) => {
-  res.status(200).send("Index.html");
-});
-
-app.get("/ping.html", (req, res) => {
-  res.status(200).send("ping.html");
 });
 
 app.get("/", (req, res) => {

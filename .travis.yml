@@ -17,7 +17,7 @@ deploy:
   secret_access_key: "$AWS_SECRET_ACCESS_KEY"
   region: "ap-northeast-2"
   app: "personality-project-api"
-  env: "personality-project-api-production"
+  env: "production"
   bucket_name: "elasticbeanstalk-ap-northeast-2-751968344197"
   on:
     branch: production
