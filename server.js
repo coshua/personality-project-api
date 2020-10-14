@@ -94,7 +94,7 @@ app.post("/api/result", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).send("10/14");
+  res.status(200).send("10/15");
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
