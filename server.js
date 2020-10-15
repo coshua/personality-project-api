@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const cors = require("cors");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
 var http = require("http");
@@ -15,6 +16,16 @@ http
   .listen(80);
 
 dotenv.config();
+
+var corsOptions = {
+  origin: [
+    "https://personality.jutopia.net",
+    /\.personality\.jutopia\.net$/,
+    /\.jutopia\.net$/,
+  ],
+  methods: ["GET", "POST"],
+  allowHeaders: "Content-Type",
+};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,7 +44,7 @@ db.connect();
 } */
 
 const filterReq = (header) => {
-  if (header["sec-fetch-site"] == undefined) return true;
+  if (header["sec-fetch-site"] == undefined) return false;
   if (
     header["sec-fetch-site"] == "same-origin" ||
     header["sec-fetch-site"] == "same-site"
@@ -63,17 +74,17 @@ SUM(CASE WHEN category = "ENFP" THEN 1 ELSE 0 END) AS "ENFP",
 SUM(CASE WHEN category = "ENFJ" THEN 1 ELSE 0 END) AS "ENFJ",
 SUM(CASE WHEN category = "ENTP" THEN 1 ELSE 0 END) AS "ENTP",
 SUM(CASE WHEN category = "ENTJ" THEN 1 ELSE 0 END) AS "ENTJ" FROM result`;
-app.get("/api/result", (req, res) => {
+app.get("/api/result", cors(corsOptions), (req, res) => {
   if (filterReq(req.headers)) {
     db.query(queryStat, (err, results) => {
       res.send(results);
     });
   } else {
-    res.status(401);
+    res.status(401).send("Not Authorized");
   }
 });
 
-app.post("/api/result", (req, res) => {
+app.post("/api/result", cors(corsOptions), (req, res) => {
   if (filterReq(req.headers)) {
     try {
       db.query(
@@ -89,12 +100,12 @@ app.post("/api/result", (req, res) => {
       res.status(500).send("Server Error");
     }
   } else {
-    res.status(401);
+    res.status(401).send("Not Authorized");
   }
 });
 
 app.get("/", (req, res) => {
-  res.status(200).send("10/15");
+  res.status(200).send("10/16");
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
