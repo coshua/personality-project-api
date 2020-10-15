@@ -19,12 +19,13 @@ dotenv.config();
 
 var corsOptions = {
   origin: [
-    "https://personality.jutopia.net",
+    "https://personality.jutopia.net/",
     /\.personality\.jutopia\.net$/,
     /\.jutopia\.net$/,
   ],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "OPTIONs"],
   allowHeaders: "Content-Type",
+  preflightContinue: true,
 };
 
 app.use(bodyParser.json());
