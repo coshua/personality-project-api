@@ -86,21 +86,22 @@ app.get("/api/result", (req, res) => {
 });
 
 app.post("/api/result", (req, res) => {
-  if (filterReq(req.headers)) {
-    if (atob(req.body.password) === "Accept this post request") {
-      try {
-        db.query(
-          "INSERT INTO result(response, category, created) VALUES(?,?,DEFAULT)",
-          [req.body.response, req.body.category],
-          (err, results) => {
-            if (err) throw err;
-            res.end();
-          }
-        );
-      } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Server Error");
-      }
+  if (
+    filterReq(req.headers) &&
+    req.headers.origin === "https://personality.jutopia.net"
+  ) {
+    try {
+      db.query(
+        "INSERT INTO result(response, category, created) VALUES(?,?,DEFAULT)",
+        [req.body.response, req.body.category],
+        (err, results) => {
+          if (err) throw err;
+          res.end();
+        }
+      );
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
     }
   } else {
     res.status(401).send("Not Authorized");
