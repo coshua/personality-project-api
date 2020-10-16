@@ -39,7 +39,7 @@ const db = mysql.createConnection({
   database: "personality",
 });
 db.connect();
-
+app.use(cors());
 /* if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 } */
@@ -75,7 +75,7 @@ SUM(CASE WHEN category = "ENFP" THEN 1 ELSE 0 END) AS "ENFP",
 SUM(CASE WHEN category = "ENFJ" THEN 1 ELSE 0 END) AS "ENFJ",
 SUM(CASE WHEN category = "ENTP" THEN 1 ELSE 0 END) AS "ENTP",
 SUM(CASE WHEN category = "ENTJ" THEN 1 ELSE 0 END) AS "ENTJ" FROM result`;
-app.get("/api/result", cors(corsOptions), (req, res) => {
+app.get("/api/result", (req, res) => {
   if (filterReq(req.headers)) {
     db.query(queryStat, (err, results) => {
       res.send(results);
@@ -85,20 +85,22 @@ app.get("/api/result", cors(corsOptions), (req, res) => {
   }
 });
 
-app.post("/api/result", cors(corsOptions), (req, res) => {
+app.post("/api/result", (req, res) => {
   if (filterReq(req.headers)) {
-    try {
-      db.query(
-        "INSERT INTO result(response, category, created) VALUES(?,?,DEFAULT)",
-        [req.body.response, req.body.category],
-        (err, results) => {
-          if (err) throw err;
-          res.end();
-        }
-      );
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
+    if (atob(req.body.password) === "Accept this post request") {
+      try {
+        db.query(
+          "INSERT INTO result(response, category, created) VALUES(?,?,DEFAULT)",
+          [req.body.response, req.body.category],
+          (err, results) => {
+            if (err) throw err;
+            res.end();
+          }
+        );
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      }
     }
   } else {
     res.status(401).send("Not Authorized");
