@@ -17,17 +17,6 @@ http
 
 dotenv.config();
 
-var corsOptions = {
-  origin: [
-    "https://personality.jutopia.net/",
-    /\.personality\.jutopia\.net$/,
-    /\.jutopia\.net$/,
-  ],
-  methods: ["GET", "POST", "OPTIONs"],
-  allowHeaders: "Content-Type",
-  preflightContinue: true,
-};
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -109,7 +98,7 @@ app.post("/api/result", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).send("10/16");
+  res.status(200).send("10/17");
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
