@@ -1,6 +1,6 @@
 branch-defaults:
   production:
-    environment: personality-project-api-production
+    environment: personality-project-api-prod
   # (optional) Other branch-specific settings
   # (e.g. if you want a staging environment)
   # master:
