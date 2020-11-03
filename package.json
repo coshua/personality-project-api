@@ -9,7 +9,7 @@
   "scripts": {
     "start_windows": "set NODE_ENV=production&&node index.js",
     "start": "node server.js",
-    "test": "",
+    "test": "node server.js",
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
