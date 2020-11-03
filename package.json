@@ -9,7 +9,7 @@
   "scripts": {
     "start_windows": "set NODE_ENV=production&&node index.js",
     "start": "node server.js",
-    "test": "node server.js",
+    "test": "jest",
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
@@ -23,6 +23,7 @@
     "nodemon": "^2.0.4"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "jest": "^26.6.2"
   }
 }
