@@ -31,6 +31,7 @@ db.connect();
 app.use(cors());
 /* if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
+  1103
 } */
 
 const filterReq = (header) => {
