@@ -99,7 +99,7 @@ app.post("/api/result", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).send("10/17");
+  res.status(200).send("1104");
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
